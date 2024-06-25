@@ -4,6 +4,7 @@ import './Settings.css';
 
 const Settings = ({ currentUsername, onUsernameChange, room, toggleSettings }) => {
   const [newUsername, setNewUsername] = useState(currentUsername);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleUsernameChange = async () => {
     if (newUsername.trim() !== '') {
@@ -11,7 +12,7 @@ const Settings = ({ currentUsername, onUsernameChange, room, toggleSettings }) =
       const roomUrl = `${window.location.origin}?room=${room}`;
 
       try {
-        const response = await axios.post('http://localhost:3000/api/users', {
+        const response = await axios.post(`${apiUrl}/api/users`, {
           username: newUsername,
           roomUrl: roomUrl
         });
